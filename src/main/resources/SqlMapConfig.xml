@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- 与spring整合后，配置在spring配置文件中，不再需要此配置文件 -->
+<configuration>
+    <!--环境配置，连接的数据库，这里使用的是MySQL-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--指定事务管理的类型，这里简单使用Java的JDBC的提交和回滚设置-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--dataSource 指连接源配置，POOLED是JDBC连接对象的数据源连接池的实现-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"></property>
+                <property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+                <property name="username" value="root"></property>
+                <property name="password" value="mysql2233"></property>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--使用.xml配置文件，对于在src下的文件直接写文件名，
+            如果在某包下，则要写明路径,如：com/mybatistest/config/User.xml-->
+        <mapper resource="UserDao.xml"></mapper>
+
+        <!--使用注解，引入单独的dao-->
+        <mapper class="com.hao.dao.AnnoUserDao"></mapper>
+    </mappers>
+</configuration>
